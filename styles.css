@@ -3,7 +3,8 @@ body {
     background-image: url('images/background.jpg'); 
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat:repeat;
+    background-attachment: fixed;
     font-family: Arial, sans-serif;
 }
 
@@ -51,7 +52,8 @@ label {
 
 input[type="email"],
 input[type="password"],
-input[type="text"] {
+input[type="text"],
+input[type="date"] {
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
@@ -63,7 +65,7 @@ input[type="text"] {
 }
 
 .log-btn {
-    background-color: #08B2E3; 
+    background-color: #3ebadce4; 
     color: #fff; 
     padding: 10px 15px;
     border: none; 
@@ -75,22 +77,27 @@ input[type="text"] {
 }
 
 .log-btn:hover {
-    background-color: #0D3B66; 
+    background-color: #00c8ff; 
+    transform: translateY(-2px);
 }
 
+.log-btn:active {
+    transform: translateY(4px);
+    box-shadow: -2px 2px #000000;
+}
 .log-text {
     color: #fff;
     margin-top: 10px;
 }
 
 .log-link {
-    color: #3C91E6; 
+    color: #3ebadce4; 
     text-decoration: none;
     font-size: 1em;
 }
 
 .log-link:hover {
     text-decoration: underline;
-    color: #FF165D;
+    color: #00c8ff;
 }
 
