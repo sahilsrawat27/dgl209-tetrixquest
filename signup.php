@@ -16,16 +16,16 @@
         <p class="game_quote">Join the puzzle adventure.</p>
             <form action="" method="POST" class="log-section">
                 <label for="fullname">Full Name</label>
-                <input type="text" id="fullname" name="fullname" required><br><br>
+                <input type="text" id="fullname" name="fullname" required>
 
                 <label for="dob">Date of Birth</label>
-                <input type="date" id="dob" name="dob" required><br><br>
+                <input type="date" id="dob" name="dob" required>
 
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required><br><br>
+                <input type="email" id="email" name="email" required>
 
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required><br><br>
+                <input type="password" id="password" name="password" required>
 
                 <button type="submit" class="log-btn">Sign Up</button>
                 <p class="log-text">Already have an account? <a href="signin.php" class="log-link">Sign In</a></p>

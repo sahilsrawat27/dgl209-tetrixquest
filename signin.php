@@ -19,9 +19,9 @@
         <div class="log-section">
             <form action="" method="POST">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required><br><br>
+                <input type="email" id="email" name="email" required>
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required><br><br>
+                <input type="password" id="password" name="password" required>
                 <button type="submit" class="log-btn">Sign In</button>
                 <p class="log-text">Don't have an account? <a href="signup.php" class="log-link">Sign Up</a></p>
             </form>
