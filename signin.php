@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tetrix Quest - Login</title>
+    <title>Tetrix Quest - SignIn</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,7 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required><br><br>
                 <button type="submit" class="log-btn">Sign In</button>
-                <p class="log-text">Don't have an account? <a href="signup.php" class="log-link">Sign up</a></p>
+                <p class="log-text">Don't have an account? <a href="signup.php" class="log-link">Sign Up</a></p>
             </form>
         </div>
     </div>
