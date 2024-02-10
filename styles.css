@@ -1,0 +1,96 @@
+body {
+    background-color: #1661c2; 
+    background-image: url('images/background.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    text-align: center;
+    margin-top: 100px;
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.game_title {
+    color: #ffffff; 
+    font-family: 'Black Ops One', system-ui;
+    text-shadow:  -2px -2px 0 #000000;
+    font-size: 4rem;
+    margin-bottom: 0.2em;
+}
+
+.game_quote {
+    color: #ffffff; 
+    font-family: 'Black Ops One', system-ui;
+    text-shadow:  -1.5px -1.5px 0 #000000;
+    font-size: 2rem;
+    font-weight:bold ;
+    margin-top: 0.2em;
+}
+
+form {
+    background-color: rgba(21, 69, 114, 0.786); 
+    padding: 20px;
+    border-radius: 5px;
+    width: 30rem;
+    margin: 0 auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: left;
+    font-size: 1.5em;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 22px);
+    background-color: #fff; 
+    color: #333; 
+    font-size: 1.2em;
+}
+
+.log-btn {
+    background-color: #08B2E3; 
+    color: #fff; 
+    padding: 10px 15px;
+    border: none; 
+    cursor: pointer;
+    margin-right: 10px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    font-size: 1.2em;
+}
+
+.log-btn:hover {
+    background-color: #0D3B66; 
+}
+
+.log-text {
+    color: #fff;
+    margin-top: 10px;
+}
+
+.log-link {
+    color: #3C91E6; 
+    text-decoration: none;
+    font-size: 1em;
+}
+
+.log-link:hover {
+    text-decoration: underline;
+    color: #FF165D;
+}
+
