@@ -110,6 +110,14 @@ document.addEventListener("DOMContentLoaded", () => {
     return false;
   }
 
+  // Check for the wall
+  function playerMove(dir) {
+    player.pos.x += dir;
+    if (collide(arena, player)) {
+      player.pos.x -= dir; // Undo the move if there's a collision
+    }
+  }
+
   const arena = createMatrix(10, 20); // Initialize the arena with the size of 10x20
 
   draw(); // Initial drawing to the screen
