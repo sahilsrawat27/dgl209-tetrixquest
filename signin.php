@@ -17,7 +17,7 @@
         <p class="game_quote">Embark on a puzzle adventure.</p>
         <!-- Sign-in form -->
         <div class="log-section">
-            <form action="" method="POST">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
                 <label for="password">Password</label>
@@ -49,23 +49,23 @@
         $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
         $password = $_POST["password"]; // Password will be hashed; sanitization specific to context
 
-        // SQL query using prepared statement to include full name and DOB
-        $stmt = $conn->prepare("SELECT id, password, full_name, dob FROM users WHERE email = ?");
+        // Corrected SQL query using prepared statement to match your database column names
+        $stmt = $conn->prepare("SELECT ID, Password, FullName, DOB FROM users WHERE Email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            if (password_verify($password, $row["password"])) {
+            if (password_verify($password, $row["Password"])) {
                 // Password is correct, start a session
                 session_start();
                 session_regenerate_id(true); // Prevent session fixation attacks
                 $_SESSION["loggedin"] = true;
-                $_SESSION["id"] = $row["id"];
+                $_SESSION["id"] = $row["ID"];
                 $_SESSION["email"] = $email;
-                $_SESSION["full_name"] = $row["full_name"]; // Store full name in session
-                $_SESSION["dob"] = $row["dob"]; // Store date of birth in session
+                $_SESSION["full_name"] = $row["FullName"]; // Corrected to match your database column name
+                $_SESSION["dob"] = $row["DOB"]; // Corrected to match your database column name
 
                 // Redirect user to the game home page
                 header("Location: index.php");
