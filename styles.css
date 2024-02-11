@@ -9,7 +9,7 @@ body {
 
 .container {
     text-align: center;
-    margin-top: 100px;
+    margin-top: 50px;
     max-width: 1200px;
     margin: auto;
     text-align: center;
@@ -155,5 +155,8 @@ input[type="date"] {
     transform: translateY(1px);
 }
 
-
-
+/*
+---------------------------------- 
+--------Game Page Styling -------- 
+----------------------------------
+*/
