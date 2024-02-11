@@ -118,6 +118,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  //
+  function playerDrop() {
+    player.pos.y++;
+    if (collide(arena, player)) {
+      player.pos.y--;
+      merge(arena, player); // Merge current tetromino with the arena
+      playerReset(); // Spawn a new tetromino
+    }
+  }
+
   const arena = createMatrix(10, 20); // Initialize the arena with the size of 10x20
 
   draw(); // Initial drawing to the screen
