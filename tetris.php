@@ -17,12 +17,12 @@
         <h1 class="game_title">Tetrix Quest</h1>
         <p class="game_quote">Embark on a puzzle adventure.</p>
         <div class="game-area">
-            <canvas id="tetris" width="300" height="600"></canvas>
+            <canvas id="tetris" width="400" height="800"></canvas>
             <div class="sidebar">
                 <div id="score">Score: 0</div>
                 <div id="level">Level: 1</div>
                 <div id="next">Next:</div>
-                <canvas id="nextPiece" width="80" height="80"></canvas>
+                <canvas id="nextPiece" width="100" height="100"></canvas>
                 <div id="special">Special:  <!-- For extra features --></div>
                
             </div>
