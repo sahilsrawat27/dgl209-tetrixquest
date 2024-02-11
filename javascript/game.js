@@ -1,63 +1,53 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Get the canvas element and its drawing context.
   const canvas = document.getElementById("tetris");
   const context = canvas.getContext("2d");
-
-  // Scale the canvas so each block drawn is effectively 20x20 pixels.
+  // Scale the canvas so each unit is 40x40 pixels.
   context.scale(40, 40);
 
   // Creates a matrix to represent the Tetris game board.
-
-  // Width (w) and height (h) parameters define the size of the grid.
   function createMatrix(w, h) {
     const matrix = [];
     while (h--) {
-      // Push a new row filled with 0s (empty cells) into the matrix.
       matrix.push(new Array(w).fill(0));
     }
     return matrix;
   }
 
-  // Draws a matrix on the canvas at the specified offset.
-  // This function is used for drawing both the game board and the tetrominos.
+  // Function to draw the matrix and add borders to each block
   function drawMatrix(matrix, offset) {
     matrix.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value !== 0) {
-          // Set the fill color for blocks (non-zero values in the matrix).
-          context.fillStyle = "red";
-          // Draw a filled rectangle for each block.
+          context.fillStyle = "red"; // Fill color for blocks
           context.fillRect(x + offset.x, y + offset.y, 1, 1);
-          // Set the stroke color for the block's border.
-          context.strokeStyle = "white";
-          // Draw a border around the block.
-          context.strokeRect(x + offset.x, y + offset.y, 1, 1);
+          context.strokeStyle = "white"; // Border color for blocks
+          context.strokeRect(x + offset.x, y + offset.y, 1, 1); // Draw the border
         }
       });
     });
   }
 
-  // Draws a grid on the canvas to visually separate the cells.
+  // Draws the grid on the canvas to visually separate the cells
   function drawGrid() {
-    context.strokeStyle = "grey"; // Set the color for the grid lines.
+    context.strokeStyle = "grey"; // Grid color
     for (let y = 0; y < 20; y++) {
-      for (let x = 0; x < 12; x++) {
-        // Draw a rectangle for each cell in the grid.
+      for (let x = 0; x < 10; x++) {
         context.strokeRect(x, y, 1, 1);
       }
     }
   }
 
-  // The main draw function that clears the canvas and redraws the game state.
+  // Draws the game state including the grid and the tetrominoes
   function draw() {
-    // Clear the entire canvas.
-    context.fillStyle = "#000";
+    context.fillStyle = "#000"; // Clear the canvas with black
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Draw the game elements.
-    drawGrid(); // Draw the background grid.
-    drawMatrix(arena, { x: 0, y: 0 }); // Draw the static blocks on the arena.
+    drawGrid(); // Draw the background grid
+    drawMatrix(arena, { x: 0, y: 0 }); // Draw the static blocks on the arena
   }
-  //Create the blocks
+
+  // Create the different tetromino shapes
   function createPiece(type) {
     if (type === "T") {
       return [
@@ -104,9 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Initialize the arena matrix with a call to createMatrix.
-  const arena = createMatrix(12, 20);
+  const arena = createMatrix(10, 20); // Initialize the arena with the size of 10x20
 
-  // Perform the initial draw call to display the setup on the canvas.
-  draw();
+  draw(); // Initial drawing to the screen
 });
