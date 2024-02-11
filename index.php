@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <h1 class="game_title">Tetrix Quest</h1>
-        <p class="game_quote">Choose your adventure.</p>
+        <p class="game_quote">Embark on a puzzle adventure.</p>
         <div class="menu-container">
             <button class="tetris-btn">Start Game</button>
             <button class="tetris-btn">Tournaments</button>

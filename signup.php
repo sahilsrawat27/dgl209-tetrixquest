@@ -13,7 +13,7 @@
     <!-- This page is copied from sigin.php and edited to ensure consistency between both the pages--> 
     <div class="container">
         <h1 class="game_title">Tetrix Quest</h1>
-        <p class="game_quote">Join the puzzle adventure.</p>
+        <p class="game_quote">Embark on a puzzle adventure.</p>
             <form action="" method="POST" class="log-section">
                 <label for="fullname">Full Name</label>
                 <input type="text" id="fullname" name="fullname" required>
