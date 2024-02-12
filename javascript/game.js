@@ -1,28 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   // Get the canvas element and its drawing context.
   const canvas = document.getElementById("tetris");
   const context = canvas.getContext("2d");
+  
   // Scale the canvas so each unit is 40x40 pixels.
   context.scale(40, 40);
 
-  // Creates a matrix to represent the Tetris game board.
-  function createMatrix(w, h) {
-    const matrix = [];
-    while (h--) {
-      matrix.push(new Array(w).fill(0));
+//Scans for arena for the completed lines and removes them
+  function arenaSweep() {
+    let rowCount = 1;
+    outer: for (let y = arena.length - 1; y > 0; --y) {
+      for (let x = 0; x < arena[y].length; ++x) {
+        if (arena[y][x] === 0) {
+          continue outer;
+        }
+      }
+
+      const row = arena.splice(y, 1)[0].fill(0);
+      arena.unshift(row);
+      ++y;
+
+      player.score += rowCount * 10;
+      rowCount *= 2;
     }
-    return matrix;
   }
 
-  // Function to draw the matrix and add borders to each block
-  function drawMatrix(matrix, offset) {
-    matrix.forEach((row, y) => {
-      row.forEach((value, x) => {
-        if (value !== 0) {
-          context.fillStyle = "red"; // Fill color for blocks
-          context.fillRect(x + offset.x, y + offset.y, 1, 1);
-          context.strokeStyle = "white"; // Border color for blocks
-          context.strokeRect(x + offset.x, y + offset.y, 1, 1); // Draw the border
         }
       });
     });
