@@ -26,30 +26,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function collide(arena, player) {
+    const [m, o] = [player.matrix, player.pos];
+    for (let y = 0; y < m.length; ++y) {
+      for (let x = 0; x < m[y].length; ++x) {
+        if (
+          m[y][x] !== 0 &&
+          (arena[y + o.y] && arena[y + o.y][x + o.x]) !== 0
+        ) {
+          return true;
         }
-      });
-    });
-  }
-
-  // Draws the grid on the canvas to visually separate the cells
-  function drawGrid() {
-    context.strokeStyle = "grey"; // Grid color
-    for (let y = 0; y < 20; y++) {
-      for (let x = 0; x < 10; x++) {
-        context.strokeRect(x, y, 1, 1);
       }
     }
+    return false;
   }
 
-  // Draws the game state including the grid and the tetrominoes
-  function draw() {
-    context.fillStyle = "#000"; // Clear the canvas with black
-    context.fillRect(0, 0, canvas.width, canvas.height);
-
-    drawGrid(); // Draw the background grid
-    drawMatrix(arena, { x: 0, y: 0 }); // Draw the static blocks on the arena
+  // Creates a matrix to represent the Tetris game board.
+  function createMatrix(w, h) {
+    const matrix = [];
+    while (h--) {
+      matrix.push(new Array(w).fill(0));
+    }
+    return matrix;
   }
-
   // Create the different tetromino shapes
   function createPiece(type) {
     if (type === "T") {
@@ -97,27 +96,91 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Check if the player's current block overlaps with existing blocks
-  function collide(arena, player) {
-    const [m, o] = [player.matrix, player.pos];
-    for (let y = 0; y < m.length; ++y) {
-      for (let x = 0; x < m[y].length; ++x) {
-        if (
-          m[y][x] !== 0 &&
-          (arena[y + o.y] && arena[y + o.y][x + o.x]) !== 0
-        ) {
-          return true;
+  // Draws the game state including the grid and the tetrominoes
+  function draw() {
+    context.fillStyle = "#000"; // Clear the canvas with black
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    drawMatrix(arena, { x: 0, y: 0 }); // Draw the static blocks on the arena
+    drawMatrix(player.matrix, player.pos);
+  }
+  // Function to draw the matrix and add borders to each block
+  function drawMatrix(matrix, offset) {
+    matrix.forEach((row, y) => {
+      row.forEach((value, x) => {
+        if (value !== 0) {
+          context.fillStyle = colors[value]; // Fill color for blocks
+          context.fillRect(x + offset.x, y + offset.y, 1, 1);
         }
+      });
+    });
+  }
+
+  // Merge the player's tetromino into the arena
+  function merge(arena, player) {
+    player.matrix.forEach((row, y) => {
+      row.forEach((value, x) => {
+        if (value !== 0) {
+          arena[y + player.pos.y][x + player.pos.x] = value;
+        }
+      });
+    });
+  }
+
+  function playerDrop() {
+    player.pos.y++;
+    if (collide(arena, player)) {
+      player.pos.y--;
+      merge(arena, player);
+      playerReset();
+      arenaSweep();
+      updateScore();
+    }
+    dropCounter = 0;
+  }
+
+  // Check for the wall
+  function playerMove(dir) {
+    player.pos.x += dir;
+    if (collide(arena, player)) {
+      player.pos.x -= dir; // Undo the move if there's a collision
+    }
+  }
+
+  // Resets the player's position and spawns a new tetromino
+  function playerReset() {
+    const pieces = "ILJOTSZ";
+    player.matrix = createPiece(pieces[(pieces.length * Math.random()) | 0]);
+    player.pos.y = 0;
+    player.pos.x =
+      ((arena[0].length / 2) | 0) - ((player.matrix[0].length / 2) | 0);
+    if (collide(arena, player)) {
+      // Game over reset
+      arena.forEach((row) => row.fill(0));
+      player.score = 0;
+      updateScore();
+    }
+  }
+
+  // Rotate the player's tetromino
+  function playerRotate(dir) {
+    const pos = player.pos.x;
+    let offset = 1;
+    rotate(player.matrix, dir);
+    while (collide(arena, player)) {
+      player.pos.x += offset;
+      offset = -(offset + (offset > 0 ? 1 : -1));
+      if (offset > player.matrix[0].length) {
+        rotate(player.matrix, -dir);
+        player.pos.x = pos;
+        return;
       }
     }
-    return false;
   }
 
   //Rotate the block
-
   function rotate(matrix, dir) {
     for (let y = 0; y < matrix.length; ++y) {
-      for (let x = 0; x < y; x++) {
+      for (let x = 0; x < y; ++x) {
         [matrix[x][y], matrix[y][x]] = [matrix[y][x], matrix[x][y]];
       }
     }
@@ -129,27 +192,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Check for the wall
-  function playerMove(dir) {
-    player.pos.x += dir;
-    if (collide(arena, player)) {
-      player.pos.x -= dir; // Undo the move if there's a collision
+  let dropCounter = 0;
+  let dropInterval = 1000;
+
+  let lastTime = 0;
+  function update(time = 0) {
+    const deltaTime = time - lastTime;
+    lastTime = time;
+
+    dropCounter += deltaTime;
+    if (dropCounter > dropInterval) {
+      playerDrop();
     }
+
+    draw();
+    requestAnimationFrame(update);
   }
 
-  //
-  function playerDrop() {
-    player.pos.y++;
-    if (collide(arena, player)) {
-      player.pos.y--;
-      merge(arena, player); // Merge current tetromino with the arena
-      playerReset(); // Spawn a new tetromino
-    }
+  function updateScore() {
+    document.getElementById("score").innerText = player.score;
   }
 
-  const arena = createMatrix(10, 20); // Initialize the arena with the size of 10x20
-
-  draw(); // Initial drawing to the screen
   // Keyboard controls for moving and rotating the tetromino
   document.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft") {
