@@ -43,15 +43,23 @@
 
         $conn = new mysqli($servername, $username, $password, $dbname);
 
+        // Check connection
+
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
+
+        // Sanitize and validate user inputs
 
         $fullname = $conn->real_escape_string($_POST['fullname']);
         $dob = $conn->real_escape_string($_POST['dob']);
         $email = $conn->real_escape_string($_POST['email']);
         $password = $conn->real_escape_string($_POST['password']);
+        // Hash the password
+
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        // Prepare an INSERT statement to add user data into the database
 
         $stmt = $conn->prepare("INSERT INTO users (FullName, DOB, Email, Password) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $fullname, $dob, $email, $hashed_password);
@@ -71,7 +79,7 @@
             echo "<p class='error'>Error: " . $stmt->error . "</p>";
         }
 
-                // Close statement and connection
+        // Close statement and connection
         $stmt->close();
         $conn->close();
     }
