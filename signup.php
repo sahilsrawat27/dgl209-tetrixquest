@@ -35,43 +35,43 @@
     </div>
 
     <?php
-    // Check if the form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Database credentials
         $servername = "localhost";
-        $username = "root"; // Update with your DB username
-        $password = ""; // Update with your DB password
-        $dbname = "tetrix_quest"; // Update with your DB name
+        $username = "root";
+        $password = "";
+        $dbname = "tetrix_quest";
 
-        // Create database connection
         $conn = new mysqli($servername, $username, $password, $dbname);
 
-        // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Sanitize and validate user inputs
         $fullname = $conn->real_escape_string($_POST['fullname']);
         $dob = $conn->real_escape_string($_POST['dob']);
         $email = $conn->real_escape_string($_POST['email']);
         $password = $conn->real_escape_string($_POST['password']);
-
-        // Hash the password
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // Prepare an INSERT statement to add user data into the database
         $stmt = $conn->prepare("INSERT INTO users (FullName, DOB, Email, Password) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $fullname, $dob, $email, $hashed_password);
 
-        // Execute the statement and check if the insert was successful
         if ($stmt->execute()) {
-            echo "<p class='success'>Registration successful. <a href='signin.php'>Sign in</a></p>";
+            // Immediately log the user in after successful registration
+            session_start();
+            $_SESSION["loggedin"] = true;
+            $_SESSION["id"] = $conn->insert_id; // Get the last inserted id to use as the user ID
+            $_SESSION["email"] = $email;
+            $_SESSION["full_name"] = $fullname; // Assuming you want to use the full name directly
+
+            echo "<p class='success'>Registration successful. Redirecting...</p>";
+            header("Refresh: 2; url=index.php"); // Redirect to index.php after 2 seconds
+            exit();
         } else {
             echo "<p class='error'>Error: " . $stmt->error . "</p>";
         }
 
-        // Close statement and connection
+                // Close statement and connection
         $stmt->close();
         $conn->close();
     }
