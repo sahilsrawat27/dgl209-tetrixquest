@@ -12,6 +12,11 @@
 
 <body>
     <div class="container">
+    <div class="profile-section">
+            <img src="images/profile.png" alt="Profile Picture" class="profile-pic">
+            <p class="profile-name"></p>
+            <a href="signin.php" class="signout-btn">Sign Out</a>
+        </div>
         <h1 class="game_title">Tetrix Quest</h1>
         <p class="game_quote">Embark on a puzzle adventure.</p>
         <div class="menu-container">
