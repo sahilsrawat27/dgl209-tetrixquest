@@ -1,13 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   // Get the canvas element and its drawing context.
   const canvas = document.getElementById("tetris");
   const context = canvas.getContext("2d");
-  
+
   // Scale the canvas so each unit is 40x40 pixels.
   context.scale(40, 40);
 
-//Scans for arena for the completed lines and removes them
+  //Scans for arena for the completed lines and removes them
   function arenaSweep() {
     let rowCount = 1;
     outer: for (let y = arena.length - 1; y > 0; --y) {
@@ -110,6 +109,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (value !== 0) {
           context.fillStyle = colors[value]; // Fill color for blocks
           context.fillRect(x + offset.x, y + offset.y, 1, 1);
+
+          // Add a white border around the block
+          context.strokeStyle = ""; // Set a transparent background
+          context.lineWidth = 0.05; // Set the border width
+          context.strokeRect(x + offset.x, y + offset.y, 1, 1); // Draw the border
         }
       });
     });
