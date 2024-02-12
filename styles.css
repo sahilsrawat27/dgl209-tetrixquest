@@ -105,6 +105,43 @@ input[type="date"] {
 --------Home Page Styling -------- 
 ----------------------------------
 */
+.profile-section {
+    position: fixed; /* Use fixed positioning to keep it visible */
+    top: 30px;
+    right: 100px;
+    text-align: center;
+    z-index: 1000; /* Ensure it's above other elements */    
+    padding: 10px;
+}
+
+.profile-pic {
+    width: 100px; /* Adjusted size, make it smaller or larger as needed */
+    height: 100px; /* Keep the height the same as the width for a circle */
+    border-radius: 50%; /* Circular profile pictures */
+    object-fit: cover; /* Ensure the image covers the space without distorting */
+    border: 2px solid white; /* Optional: Adds a white border around the picture */
+}
+
+.profile-name {
+    color: #ffffff;
+    margin-top: 5px;
+    font-size: 1em; /* Adjust font size as needed */
+}
+
+.signout-btn {
+    border: 2px solid #08B2E3; 
+    background-color: #0D3B66; 
+    color: #FFFFFF; 
+    font-family: 'Black Ops One';
+    padding: 5px 10px; /* Smaller padding for a smaller button */
+    font-size: 0.8em; /* Smaller font size */
+    width: auto; /* Adjust width based on content */
+    max-width: 100px; /* Prevent the button from becoming too wide */
+    margin-top: 10px; /* Space above the button */
+    display: inline-block; /* Display as inline-block for better control */
+}
+
+
 
 .menu-container {
     display: flex;
@@ -142,14 +179,14 @@ input[type="date"] {
 }
 
 /* Hover state for Tetris buttons */
-.tetris-btn:hover {
+.signout-btn:hover, .tetris-btn:hover {
     background-color: #1177BB; 
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
     transform: translateY(-2px);
 }
 
 /* Active state for Tetris buttons */
-.tetris-btn:active {
+.signout-btn:active, .tetris-btn:active {
     background-color: #0D3B66; 
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
     transform: translateY(1px);
