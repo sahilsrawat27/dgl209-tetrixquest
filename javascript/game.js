@@ -150,4 +150,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const arena = createMatrix(10, 20); // Initialize the arena with the size of 10x20
 
   draw(); // Initial drawing to the screen
+  // Keyboard controls for moving and rotating the tetromino
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      playerMove(-1);
+    } else if (event.key === "ArrowRight") {
+      playerMove(1);
+    } else if (event.key === "ArrowDown") {
+      playerDrop();
+    } else if (event.key === "ArrowUp") {
+      // Rotate counterclockwise
+      playerRotate(-1);
+    }
+  });
+
+  const colors = [
+    null,
+    "#FF0D72",
+    "#0DC2FF",
+    "#0DFF72",
+    "#F538FF",
+    "#FF8E0D",
+    "#FFE138",
+    "#3877FF",
+  ];
+
+  const arena = createMatrix(12, 20);
+
+  const player = {
+    pos: { x: 0, y: 0 },
+    matrix: null,
+    score: 0,
+  };
+
+  playerReset();
+  updateScore();
+  update();
 });
