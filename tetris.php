@@ -19,12 +19,15 @@
         <div class="game-area">
             <canvas id="tetris" width="480" height="800"></canvas>
             <div class="sidebar">
-                <div id="score">Score: 0</div>
-                <div id="level">Level: 1</div>
-                <div id="next">Next:</div>
-                <canvas id="nextPiece" width="100" height="100"></canvas>
-                <div id="special">Special:  <!-- For extra features --></div>
-               
+                <div class="game_heading">Score</div>
+                <div class="game_content" id="score">0</div>
+                <div class="game_heading">Level</div>
+                <div class="game_content" id="level">1</div>
+                <div class="game_heading">Next</div>
+                <canvas  class="game_content" id="nextPiece" width="80" height="80"></canvas>
+                <div class="game_heading">Special</div>
+                <div class="game_content" id="special">Extra Features... <!-- For extra features --></div>
+
             </div>
         </div>
     </div>
