@@ -33,14 +33,52 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         <h1 class="game_title">Tetrix Quest</h1>
         <p class="game_quote">Embark on a puzzle adventure.</p>
         <div class="menu-container">
-            <button class="tetris-btn">Start Game</button>
-            <button class="tetris-btn">Tournaments</button>
-            <button class="tetris-btn">High Scores</button>
-            <button class="tetris-btn">Instructions</button>
+            <a class="link_pad" href="tetris.php"> <button class="tetris-btn">Start Game</button></a>
+            <a class="link_pad" href="tournaments.php"> <button class="tetris-btn">Tournaments</button></a>
+            
+            <button class="tetris-btn high-scores">High Scores</button>
+            <!-- High Scores Modal -->
+            <div id="highScoresModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-button" onclick="closeModal('highScoresModal')">&times;</span>
+                    <h2>High Scores</h2>
+                    <p class="score">High scores will be displayed here...</p>
+                </div>
+            </div>
+            <button class="tetris-btn instructions">Instructions</button>
+            <!-- Instructions Modal -->
+            <div id="instructionsModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-button" onclick="closeModal('instructionsModal')">&times;</span>
+                    <h2>Instructions</h2>
+                    <p>Press arrow right or arrow left to move the block sideways. To move the block downward, press arrow down button.
+                        Press arrow up button to rotate the block.
+                    </p>
+                </div>
+            </div>
+
             <button class="tetris-btn">Exit Game</button>
         </div>
     </div>
 
+<script> // Function to open a modal
+function openModal(modalId) {
+    document.getElementById(modalId).style.display = "block";
+}
+
+// Function to close a modal
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+}
+
+// Example usage: Attach these functions to button clicks
+document.querySelector('.tetris-btn.instructions').addEventListener('click', function() {
+    openModal('instructionsModal');
+});
+
+document.querySelector('.tetris-btn.high-scores').addEventListener('click', function() {
+    openModal('highScoresModal');
+});</script>
 </body>
 
 </html>
