@@ -130,8 +130,8 @@ input[type="date"] {
 
 .profile-name {
     color: #ffffff;
-    margin-top: 5px;
-    font-size: 1em;
+    margin: 5px;
+    font-size: 2em;
     /* Adjust font size as needed */
 }
 
