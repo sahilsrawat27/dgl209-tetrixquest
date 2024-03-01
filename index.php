@@ -57,7 +57,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 </div>
             </div>
 
-            <button class="tetris-btn">Exit Game</button>
+            <a class="link_pad" href="signin.php"><button class="tetris-btn">Exit Game</button></a>
         </div>
     </div>
 
