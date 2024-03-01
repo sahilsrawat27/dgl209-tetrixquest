@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("tetris");
   const context = canvas.getContext("2d");
 
+  let isPaused = false; // Game starts in playing state, so 'paused' is false
+
   // Scale the canvas so each unit is 40x40 pixels.
   context.scale(40, 40);
 
@@ -95,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+
   // Draws the game state including the grid and the tetrominoes
   function draw() {
     context.fillStyle = "#000"; // Clear the canvas with black
@@ -102,6 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
     drawMatrix(arena, { x: 0, y: 0 }); // Draw the static blocks on the arena
     drawMatrix(player.matrix, player.pos);
   }
+
+
   // Function to draw the matrix and add borders to each block
   function drawMatrix(matrix, offset) {
     matrix.forEach((row, y) => {
@@ -119,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+
   // Merge the player's tetromino into the arena
   function merge(arena, player) {
     player.matrix.forEach((row, y) => {
@@ -129,6 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
 
   function playerDrop() {
     player.pos.y++;
@@ -142,6 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dropCounter = 0;
   }
 
+
   // Check for the wall
   function playerMove(dir) {
     player.pos.x += dir;
@@ -149,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
       player.pos.x -= dir; // Undo the move if there's a collision
     }
   }
+
 
   // Resets the player's position and spawns a new tetromino
   function playerReset() {
@@ -164,6 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateScore();
     }
   }
+
 
   // Rotate the player's tetromino
   function playerRotate(dir) {
@@ -181,6 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+
   //Rotate the block
   function rotate(matrix, dir) {
     for (let y = 0; y < matrix.length; ++y) {
@@ -196,21 +207,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+
   let dropCounter = 0;
   let dropInterval = 1000;
-
   let lastTime = 0;
-  function update(time = 0) {
-    const deltaTime = time - lastTime;
-    lastTime = time;
 
-    dropCounter += deltaTime;
-    if (dropCounter > dropInterval) {
-      playerDrop();
+
+  function update(time = 0) {
+    if (!isPaused) {
+      const deltaTime = time - lastTime;
+      lastTime = time;
+
+      dropCounter += deltaTime;
+      if (dropCounter > dropInterval) {
+        playerDrop();
+        dropCounter = 0;
+      }
     }
 
     draw();
     requestAnimationFrame(update);
+  }
+
+  
+  function togglePlayPause() {
+    isPaused = !isPaused; // Toggle the pause state
+    
+    // Update UI to reflect the current state
+    document.getElementById("playPauseButton").innerText = isPaused
+      ? "Play"
+      : "Pause";
   }
 
   function updateScore() {
@@ -228,8 +254,18 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (event.key === "ArrowUp") {
       // Rotate counterclockwise
       playerRotate(-1);
+    } else if (event.key === "p" || event.key === "P") {
+      togglePlayPause();
     }
   });
+
+  document
+    .getElementById("playPauseButton")
+    .addEventListener("click", function () {
+      togglePlayPause();
+      // Update button text based on the game state
+      this.innerText = isPaused ? "Play" : "Pause";
+    });
 
   const colors = [
     null,
