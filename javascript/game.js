@@ -239,8 +239,28 @@ document.addEventListener("DOMContentLoaded", () => {
       : "Pause";
   }
 
+
+  // Help from Chatgpt to use js to update score.....
+
   function updateScore() {
     document.getElementById("score").innerText = player.score;
+      
+    // AJAX call to send the score to the server
+      var xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
+      xhr.open("POST", "submitScore.php", true); // Configure it: POST-request for the URL /submitScore.php
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Set the request header
+    
+      xhr.onload = function() { // Define what happens on successful data submission
+        if (this.status == 200) {
+          console.log('Score submitted successfully');
+        }
+      };
+    
+      // Prepare the data to be sent in the request
+      var data = 'score=' + player.score;
+      
+      xhr.send(data); // Send the request with the score data
+    
   }
 
   // Keyboard controls for moving and rotating the tetromino
