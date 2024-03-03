@@ -44,25 +44,25 @@
         $conn = new mysqli($servername, $username, $password, $dbname);
 
         // Check connection
-
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
 
         // Sanitize and validate user inputs
-
         $fullname = $conn->real_escape_string($_POST['fullname']);
         $dob = $conn->real_escape_string($_POST['dob']);
         $email = $conn->real_escape_string($_POST['email']);
         $password = $conn->real_escape_string($_POST['password']);
-        // Hash the password
 
+        // Hash the password
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // Prepare an INSERT statement to add user data into the database
+        // Assume initializing high score to 0 for new registrations
+        $initialHighScore = 0;
 
-        $stmt = $conn->prepare("INSERT INTO users (FullName, DOB, Email, Password) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $fullname, $dob, $email, $hashed_password);
+        // Prepare an INSERT statement to add user data into the database
+        $stmt = $conn->prepare("INSERT INTO users (FullName, DOB, Email, Password, Highscore) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssi", $fullname, $dob, $email, $hashed_password, $initialHighScore);
 
         if ($stmt->execute()) {
             // Immediately log the user in after successful registration
@@ -70,7 +70,9 @@
             $_SESSION["loggedin"] = true;
             $_SESSION["id"] = $conn->insert_id; // Get the last inserted id to use as the user ID
             $_SESSION["email"] = $email;
-            $_SESSION["full_name"] = $fullname; // Assuming you want to use the full name directly
+            $_SESSION["full_name"] = $fullname;
+            // Since this is a new registration, initialize score to 0
+            $_SESSION["score"] = $initialHighScore;
 
             echo "<p class='success'>Registration successful. Redirecting...</p>";
             header("Refresh: 2; url=index.php"); // Redirect to index.php after 2 seconds
@@ -83,6 +85,7 @@
         $stmt->close();
         $conn->close();
     }
+
     ?>
 </body>
 

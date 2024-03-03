@@ -4,8 +4,10 @@ session_start(); // Start or resume the session at the beginning of the script
 // Check if the user is logged in, using the session variable
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     $fullName = $_SESSION["full_name"]; // Retrieve the full name from the session
+    $score = $_SESSION["score"]; //Retrive the highscore from the session
 } else {
     $fullName = 'Guest'; // Default name if not logged in
+    $score = 'No score yet'; // Default score
 }
 ?>
 
@@ -39,11 +41,13 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
             <button class="tetris-btn high-scores">High Scores</button>
             <!-- High Scores Modal -->
             <div id="highScoresModal" class="modal">
+            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) : ?>
                 <div class="modal-content">
                     <span class="close-button" onclick="closeModal('highScoresModal')">&times;</span>
                     <h2>High Scores</h2>
-                    <p class="score">High scores will be displayed here...</p>
+                    <p id="score"><?php echo htmlspecialchars($score); ?></p>
                 </div>
+            <?php endif; ?>
             </div>
             <button class="tetris-btn instructions">Instructions</button>
             <!-- Instructions Modal -->

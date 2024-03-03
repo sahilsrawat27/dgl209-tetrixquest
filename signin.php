@@ -33,9 +33,9 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Database credentials
         $servername = "localhost";
-        $username = "root"; // Update with your DB username
-        $password = ""; // Update with your DB password
-        $dbname = "tetrix_quest"; // Update with your DB name
+        $username = "root"; 
+        $password = ""; 
+        $dbname = "tetrix_quest"; 
 
         // Create database connection
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -49,8 +49,7 @@
         $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
         $password = $_POST["password"]; // Password will be hashed; sanitization specific to context
 
-        // Corrected SQL query using prepared statement to match your database column names
-        $stmt = $conn->prepare("SELECT ID, Password, FullName, DOB FROM users WHERE Email = ?");
+        $stmt = $conn->prepare("SELECT ID, Password, FullName, DOB, Highscore FROM users WHERE Email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -64,8 +63,9 @@
                 $_SESSION["loggedin"] = true;
                 $_SESSION["id"] = $row["ID"];
                 $_SESSION["email"] = $email;
-                $_SESSION["full_name"] = $row["FullName"]; // Corrected to match your database column name
-                $_SESSION["dob"] = $row["DOB"]; // Corrected to match your database column name
+                $_SESSION["full_name"] = $row["FullName"]; 
+                $_SESSION["dob"] = $row["DOB"]; 
+                $_SESSION["score"] =$row["Highscore"];
 
                 // Redirect user to the game home page
                 header("Location: index.php");
