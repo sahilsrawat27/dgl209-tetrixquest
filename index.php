@@ -37,17 +37,17 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         <div class="menu-container">
             <a class="link_pad" href="tetris.php"> <button class="tetris-btn">Start Game</button></a>
             <a class="link_pad" href="tournaments.php"> <button class="tetris-btn">Tournaments</button></a>
-            
+
             <button class="tetris-btn high-scores">High Scores</button>
             <!-- High Scores Modal -->
             <div id="highScoresModal" class="modal">
-            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) : ?>
-                <div class="modal-content">
-                    <span class="close-button" onclick="closeModal('highScoresModal')">&times;</span>
-                    <h2>High Scores</h2>
-                    <p id="score"><?php echo htmlspecialchars($score); ?></p>
-                </div>
-            <?php endif; ?>
+                <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) : ?>
+                    <div class="modal-content">
+                        <span class="close-button" onclick="closeModal('highScoresModal')">&times;</span>
+                        <h2>High Scores</h2>
+                        <p id="score"></p>
+                    </div>
+                <?php endif; ?>
             </div>
             <button class="tetris-btn instructions">Instructions</button>
             <!-- Instructions Modal -->
@@ -65,24 +65,41 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         </div>
     </div>
 
-<script> // Function to open a modal
-function openModal(modalId) {
-    document.getElementById(modalId).style.display = "block";
-}
+    <script>
+        // Function to open a modal
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
 
-// Function to close a modal
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = "none";
-}
+        // Function to close a modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
 
-// Example usage: Attach these functions to button clicks
-document.querySelector('.tetris-btn.instructions').addEventListener('click', function() {
-    openModal('instructionsModal');
-});
+        document.querySelector('.tetris-btn.instructions').addEventListener('click', function() {
+            openModal('instructionsModal');
+        });
 
-document.querySelector('.tetris-btn.high-scores').addEventListener('click', function() {
-    openModal('highScoresModal');
-});</script>
+        document.querySelector('.tetris-btn.high-scores').addEventListener('click', function() {
+            openModal('highScoresModal');
+        });
+
+        //From chatgpt to update score faster
+        // Function to fetch and update the high score
+        function fetchAndUpdateHighScore() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "fetch_highscore.php", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById("score").innerText = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+
+        // Call the function at regular intervals
+        setInterval(fetchAndUpdateHighScore, 1000); // Update every 10 seconds
+    </script>
 </body>
 
 </html>
