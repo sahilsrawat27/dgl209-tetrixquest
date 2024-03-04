@@ -46,7 +46,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 <div class="game_heading">Special</div>
                 <div class="game_content" id="special">Extra Features... <!-- For extra features --></div>
                 <button id="playPauseButton">Pause</button>
-
+                <button id="restartButton">Restart Game</button>
             </div>
         </div>
     </div>
