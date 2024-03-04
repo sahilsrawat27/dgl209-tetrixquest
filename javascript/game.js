@@ -279,6 +279,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+
+  // Function for restart button
+  function gameRestart() {
+    arena.forEach(row => row.fill(0)); // Clear the entire arena
+    player.score = 0; // Reset score
+    playerReset(); // Get a new tetromino and reset player's position
+    updateScore(); // Update the score display
+    // If you have any pause logic or game over flags, reset them as well
+    if (isPaused) togglePlayPause(); // Ensure the game is not paused
+}
+  document.getElementById('restartButton').addEventListener('click', function() {
+    gameRestart();
+});
+
   document
     .getElementById("playPauseButton")
     .addEventListener("click", function () {
