@@ -46,9 +46,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 <div class="game_content" id="level">1</div>
                 <div class="game_heading">Next</div>
                 <canvas class="game_content" id="nextPiece" width="80" height="80"></canvas>
-                <div class="game_heading">Special</div>
-                <div class="game_content" id="special">Extra Features... <!-- For extra features --></div>
-
             </div>
         </div>
     </div>
