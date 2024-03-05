@@ -236,6 +236,9 @@ input[type="date"] {
     margin: 1rem 0;
     width: 100%;
 }
+.game_heading{
+    margin-top: 1rem;
+}
 
 .game_content, .game_heading{
     font-weight: bold;
