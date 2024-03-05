@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       player.score += rowCount * 10;
       rowCount *= 2;
     }
+    checkLevelUp();
   }
 
   function collide(arena, player) {
@@ -215,6 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let dropCounter = 0;
   let dropInterval = 1000;
   let lastTime = 0;
+  let scoreNextLevel=  150; // Score needed to reach the next level
 
   function update(time = 0) {
     if (!isPaused) {
@@ -222,7 +224,7 @@ document.addEventListener("DOMContentLoaded", () => {
       lastTime = time;
 
       dropCounter += deltaTime;
-      if (dropCounter > dropInterval) {
+      if (dropCounter > dropInterval - (player.level * 100 - 100)) { // Speeds up based on level
         playerDrop();
         dropCounter = 0;
       }
@@ -245,6 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateScore() {
     document.getElementById("score").innerText = player.score;
+    document.getElementById("level").innerText = player.level;
 
     // AJAX call to send the score to the server
     var xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
@@ -262,6 +265,15 @@ document.addEventListener("DOMContentLoaded", () => {
     var data = "score=" + player.score;
 
     xhr.send(data); // Send the request with the score data
+  }
+
+  function checkLevelUp() {
+    if (player.score >= scoreNextLevel) {
+      player.level++;
+      scoreNextLevel += 100; // Increase the threshold for the next level
+      dropInterval -= 50; // Increase the speed of the game
+      updateScore(); // Update the score and level display
+    }
   }
 
   // Keyboard controls for moving and rotating the tetromino
@@ -380,6 +392,7 @@ document.addEventListener("DOMContentLoaded", () => {
     pos: { x: 0, y: 0 },
     matrix: null,
     score: 0,
+    level:1
   };
 
   playerReset();
