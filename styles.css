@@ -284,3 +284,47 @@ input[type="date"] {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* Leaderboard Styles */
+.leaderboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(13, 59, 102, 0.8); /* Semi-transparent background */
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    margin-left: auto; /* Center the leaderboard horizontally */
+    margin-right: auto; /* Center the leaderboard horizontally */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    width: 20%; /* Adjust the width as needed */
+}
+
+
+.leaderboard h2 {
+    font-family: 'Black Ops One';
+    color: #FFFFFF;
+    text-align: center;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.leaderboard table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.leaderboard th, .leaderboard td {
+    padding: 10px;
+    color: #FFFFFF;
+    font-family: Arial, sans-serif;
+    border-bottom: 2px solid #08B2E3;
+}
+
+.leaderboard th {
+    background-color: #0D3B66;
+    text-transform: uppercase;
+}
+
+.leaderboard td {
+    background-color: rgba(255, 255, 255, 0.2);
+}
