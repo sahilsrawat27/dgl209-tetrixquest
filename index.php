@@ -56,7 +56,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                     <span class="close-button" onclick="closeModal('instructionsModal')">&times;</span>
                     <h2>Instructions</h2>
                     <p>Press arrow right or arrow left to move the block sideways. To move the block downward, press arrow down button.
-                        Press arrow up button to rotate the block.
+                        Press arrow up button to rotate the block. Press P to play/pause the game.
                     </p>
                 </div>
             </div>
