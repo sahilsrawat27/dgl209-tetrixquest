@@ -15,9 +15,33 @@
     <div class="container">
         <h1 class="game_title">Tetrix Quest</h1>
         <p class="game_quote">Embark on a puzzle adventure.</p>
-        <div>
-            In Progress...............
+        <div class="leaderboard" id="leaderboard">
+            <h2>Leaderboard</h2>
+            <!-- PHP-generated leaderboard will be initially displayed here but replaced by JavaScript -->
+            <div id="leaderboard-content"> <!-- Add this wrapper for the initial PHP content -->
+                <?php if (!empty($leaderboard)) : ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>High Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($leaderboard as $row) : ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($row['FullName']) ?></td>
+                                    <td><?= htmlspecialchars($row['Highscore']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php else : ?>
+                    <p>No scores to display.</p>
+                <?php endif; ?>
+            </div>
         </div>
+
     </div>
 </body>
 
