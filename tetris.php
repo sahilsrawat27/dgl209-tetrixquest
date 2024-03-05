@@ -25,7 +25,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 
 <body>
     <div class="container">
-    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) : ?>
+        <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) : ?>
             <div class="profile-section">
                 <img src="images/profile.png" alt="Profile Picture" class="profile-pic">
                 <p class="profile-name"><?php echo htmlspecialchars($fullName); ?></p>
@@ -37,16 +37,18 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         <div class="game-area">
             <canvas id="tetris" width="480" height="800"></canvas>
             <div class="sidebar">
+                <button id="playPauseButton">Pause</button>
+                <button id="restartButton">Restart Game</button>
+                <button id="homeButton">Home</button>
                 <div class="game_heading">Score</div>
                 <div class="game_content" id="score">0</div>
                 <div class="game_heading">Level</div>
                 <div class="game_content" id="level">1</div>
                 <div class="game_heading">Next</div>
-                <canvas  class="game_content" id="nextPiece" width="80" height="80"></canvas>
+                <canvas class="game_content" id="nextPiece" width="80" height="80"></canvas>
                 <div class="game_heading">Special</div>
                 <div class="game_content" id="special">Extra Features... <!-- For extra features --></div>
-                <button id="playPauseButton">Pause</button>
-                <button id="restartButton">Restart Game</button>
+
             </div>
         </div>
     </div>

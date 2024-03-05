@@ -292,6 +292,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById('restartButton').addEventListener('click', function() {
     gameRestart();
 });
+document.getElementById("homeButton").addEventListener("click", function() {
+  window.location.href = "index.php";
+});
 
   document
     .getElementById("playPauseButton")

@@ -219,6 +219,8 @@ input[type="date"] {
     border: 3px solid;
     padding: 0.5rem;
     vertical-align: top;
+    background-color: #00c8ff;
+    height: 100%;
 
 }
 .game_content {
@@ -226,6 +228,7 @@ input[type="date"] {
     padding: 1rem 0;
     margin: 1rem 0;
 }
+
 .game_content, .game_heading{
     font-weight: bold;
     font-size: large;
