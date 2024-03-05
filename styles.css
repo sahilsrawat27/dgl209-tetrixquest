@@ -142,9 +142,9 @@ input[type="date"] {
     font-family: 'Black Ops One';
     padding: 5px 10px;
     /* Smaller padding for a smaller button */
-    font-size: 0.8em;
+    font-size: 1em;
     /* Smaller font size */
-    width: auto;
+    width: 100%;
     /* Adjust width based on content */
     max-width: 100px;
     /* Prevent the button from becoming too wide */
@@ -153,9 +153,11 @@ input[type="date"] {
     display: inline-block;
     /* Display as inline-block for better control */
 }
-
-
-
+.button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .menu-container {
     display: flex;
     flex-direction: column;

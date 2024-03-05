@@ -314,7 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function drawNextPiece(matrix) {
     const nextPieceCanvas = document.getElementById("nextPiece");
     const context = adjustCanvasForHighDPI(nextPieceCanvas); // Adjust for high DPI
-    const blockSize = 60; // Set the size of each block
+    const blockSize = 30; // Set the size of each block
 
     const matrixWidth = matrix[0].length * blockSize;
     const matrixHeight = matrix.length * blockSize;

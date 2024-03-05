@@ -37,9 +37,11 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         <div class="game-area">
             <canvas id="tetris" width="480" height="800"></canvas>
             <div class="sidebar">
-                <button id="playPauseButton">Pause</button>
-                <button id="restartButton">Restart Game</button>
-                <button id="homeButton">Home</button>
+                <div class="button">
+                    <button class="signout-btn" id="playPauseButton">Pause</button>
+                    <button class="signout-btn" id="restartButton">Restart Game</button>
+                    <button class="signout-btn" id="homeButton">Home</button>
+                </div>
                 <div class="game_heading">Score</div>
                 <div class="game_content" id="score">0</div>
                 <div class="game_heading">Level</div>
