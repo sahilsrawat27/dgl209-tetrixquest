@@ -43,6 +43,50 @@
         </div>
 
     </div>
+    <script>
+        function updateLeaderboard() {
+            fetch('fetch_leaderboard.php')
+                .then(response => response.json())
+                .then(data => {
+                    const leaderboardContentElement = document.getElementById('leaderboard-content');
+                    leaderboardContentElement.innerHTML = ''; // Clear current leaderboard entries
+
+                    if (data.length > 0) {
+                        const table = document.createElement('table');
+                        const thead = document.createElement('thead');
+                        const tbody = document.createElement('tbody');
+
+                        // Heading Row
+                        let row = thead.insertRow();
+                        let th1 = row.insertCell(0);
+                        let th2 = row.insertCell(1);
+                        th1.innerHTML = "<b>Full Name</b>";
+                        th2.innerHTML = "<b>High Score</b>";
+
+                        table.appendChild(thead);
+
+                        // Data Rows
+                        data.forEach(entry => {
+                            let row = tbody.insertRow();
+                            let cell1 = row.insertCell(0);
+                            let cell2 = row.insertCell(1);
+                            cell1.innerText = entry.FullName;
+                            cell2.innerText = entry.Highscore;
+                        });
+
+                        table.appendChild(tbody);
+                        leaderboardContentElement.appendChild(table);
+                    } else {
+                        leaderboardContentElement.innerText = 'No scores to display.';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching leaderboard:', error);
+                });
+        }
+        updateLeaderboard(); // Populate leaderboard immediately on page load
+
+    </script>
 </body>
 
 </html>
