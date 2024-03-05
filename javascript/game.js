@@ -214,9 +214,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   let dropCounter = 0;
-  let dropInterval = 1000;
+  let dropInterval = 500;
   let lastTime = 0;
-  let scoreNextLevel=  150; // Score needed to reach the next level
+  let scoreNextLevel=  100; // Score needed to reach the next level
 
   function update(time = 0) {
     if (!isPaused) {
