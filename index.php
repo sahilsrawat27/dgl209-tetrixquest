@@ -55,11 +55,17 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 <div class="modal-content">
                     <span class="close-button" onclick="closeModal('instructionsModal')">&times;</span>
                     <h2>Instructions</h2>
-                    <p>Press arrow right or arrow left to move the block sideways. To move the block downward, press arrow down button.
-                        Press arrow up button to rotate the block. Press P to play/pause the game.
-                    </p>
+                    <p>Use the keyboard to control the game:</p>
+                    <div class="key-container">
+                        <kbd class="keyboard-key">←</kbd> Move Left
+                        <kbd class="keyboard-key">→</kbd> Move Right
+                        <kbd class="keyboard-key">↓</kbd> Move Down
+                        <kbd class="keyboard-key">↑</kbd> Rotate
+                        <kbd class="keyboard-key">P</kbd> Pause/Play
+                    </div>
                 </div>
             </div>
+
 
             <a class="link_pad" href="signin.php"><button class="tetris-btn">Exit Game</button></a>
         </div>
