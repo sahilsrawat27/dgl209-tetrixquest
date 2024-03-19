@@ -49,6 +49,13 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 <div class="game_heading">Next</div>
                 <canvas class="game_content" id="nextPiece" width="80" height="80"></canvas>
             </div>
+            <div class="controls">
+                <div class="control-btn" id="pauseControl">||</div>
+                <div class="control-btn" id="leftControl">←</div>
+                <div class="control-btn" id="rightControl">→</div>
+                <div class="control-btn" id="downControl">↓</div>
+                <div class="control-btn" id="rotateControl">↻</div>
+            </div>
         </div>
     </div>
 </body>
