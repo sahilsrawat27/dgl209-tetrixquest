@@ -305,6 +305,7 @@ input[type="date"] {
 
 .key-container {
     margin: 10px 0;
+    display: flex;
 }
 
 
@@ -355,4 +356,31 @@ input[type="date"] {
 
 .leaderboard td {
     background-color: rgba(255, 255, 255, 0.2);
+}
+
+.controls {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.control-btn {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 10px;
+    font-size: 20px;
+    background: #2980b9;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.control-btn:active {
+    background: #3498db;
 }
