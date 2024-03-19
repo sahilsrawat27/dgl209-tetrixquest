@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let dropCounter = 0;
   let dropInterval = 500;
   let lastTime = 0;
-  let scoreNextLevel=  100; // Score needed to reach the next level
+  let scoreNextLevel = 100; // Score needed to reach the next level
 
   function update(time = 0) {
     if (!isPaused) {
@@ -224,7 +224,8 @@ document.addEventListener("DOMContentLoaded", () => {
       lastTime = time;
 
       dropCounter += deltaTime;
-      if (dropCounter > dropInterval - (player.level * 100 - 100)) { // Speeds up based on level
+      if (dropCounter > dropInterval - (player.level * 100 - 100)) {
+        // Speeds up based on level
         playerDrop();
         dropCounter = 0;
       }
@@ -241,6 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("playPauseButton").innerText = isPaused
       ? "Play"
       : "Pause";
+    document.getElementById("pauseControl").innerText = isPaused ? ">" : "||";
   }
 
   // Help from Chatgpt to use js to update score.....
@@ -292,7 +294,54 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // This is because the canvas was showing pixelated blocks(help fro chatgpt)
+  // Function to simulate key presses
+  function simulateKeyPress(keyValue) {
+    var event = new KeyboardEvent("keydown", {
+      key: keyValue,
+      bubbles: true,
+      cancelable: true,
+    });
+
+    document.dispatchEvent(event);
+  }
+
+  // Event listeners for on-screen controls
+
+  document
+    .getElementById("pauseControl")
+    .addEventListener("click", function () {
+      togglePlayPause();
+
+      this.innerText = isPaused ? ">" : "||";
+    });
+  document.getElementById("leftControl").addEventListener("click", function () {
+    simulateKeyPress("ArrowLeft");
+  });
+
+  document
+    .getElementById("rightControl")
+    .addEventListener("click", function () {
+      simulateKeyPress("ArrowRight");
+    });
+
+  document.getElementById("downControl").addEventListener("click", function () {
+    simulateKeyPress("ArrowDown");
+  });
+
+  document
+    .getElementById("rotateControl")
+    .addEventListener("click", function () {
+      simulateKeyPress("ArrowUp");
+    });
+
+  // Prevent default behavior for mousedown on button elements to avoid focus change
+  document.querySelectorAll(".control-btn").forEach((button) => {
+    button.addEventListener("mousedown", function (e) {
+      e.preventDefault();
+    });
+  });
+
+  // This is because the canvas was showing pixelated blocks(help from chatgpt)
 
   function adjustCanvasForHighDPI(canvas) {
     const dpi = window.devicePixelRatio || 1;
@@ -392,7 +441,7 @@ document.addEventListener("DOMContentLoaded", () => {
     pos: { x: 0, y: 0 },
     matrix: null,
     score: 0,
-    level:1
+    level: 1,
   };
 
   playerReset();
