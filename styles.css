@@ -28,7 +28,7 @@ body {
     text-shadow: -1.5px -1.5px 0 #000000;
     font-size: 2rem;
     font-weight: bold;
-    margin-top: 0.2em;
+    margin: 0.1em 0;
 }
 
 form {
