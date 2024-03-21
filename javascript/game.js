@@ -273,7 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (player.score >= scoreNextLevel) {
       player.level++;
       scoreNextLevel += 100; // Increase the threshold for the next level
-      dropInterval -= 50; // Increase the speed of the game
+      dropInterval -= 10; // Increase the speed of the game
       updateScore(); // Update the score and level display
     }
   }
