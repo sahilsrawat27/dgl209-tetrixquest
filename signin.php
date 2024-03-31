@@ -23,6 +23,8 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
                 <button type="submit" class="log-btn">Sign In</button>
+                <!-- Forget Password Link -->
+                <p class="log-text"><a href="forget_password.php" class="log-link">Forgot Password?</a></p>
                 <p class="log-text">Don't have an account? <a href="signup.php" class="log-link">Sign Up</a></p>
             </form>
         </div>
