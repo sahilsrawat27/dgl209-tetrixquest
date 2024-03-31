@@ -57,11 +57,11 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                     <h2>Instructions</h2>
                     <p>Use the keyboard to control the game:</p>
                     <div class="key-container">
-                        <kbd class="keyboard-key">←</kbd> Move Left
-                        <kbd class="keyboard-key">→</kbd> Move Right
-                        <kbd class="keyboard-key">↓</kbd> Move Down
-                        <kbd class="keyboard-key">↑</kbd> Rotate
-                        <kbd class="keyboard-key">P</kbd> Pause/Play
+                        <div class="key-icon"><kbd class="keyboard-key">←</kbd> Move Left</div>
+                        <div class="key-icon"><kbd class="keyboard-key">→</kbd> Move Right</div>
+                        <div class="key-icon"><kbd class="keyboard-key">↓</kbd> Move Down</div>
+                        <div class="key-icon"><kbd class="keyboard-key">↑</kbd> Rotate</div>
+                        <div class="key-icon"><kbd class="keyboard-key">P</kbd> Pause/Play</div>
                     </div>
                 </div>
             </div>
